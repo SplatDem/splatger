@@ -1,9 +1,10 @@
 # fileger
-
-WORKING VERY BAD! WORK IN PROGRESS
+## Work in progress
 
 This my first try to make something good with rust.
-![2024-10-07-144524_1919x1079_scrot](https://github.com/user-attachments/assets/2090d9a7-4e30-4924-a79c-a95620417b25)
+![2024-10-11-215549_1919x1079_scrot](https://github.com/user-attachments/assets/d31add28-ef8b-4f00-b584-13fdae803a27)
+
+I don't know when I'll finish it, but now it seems to be usable.
 
 `git clone` this repo then 
 `cargo build --release`
