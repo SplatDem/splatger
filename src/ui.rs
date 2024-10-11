@@ -57,14 +57,19 @@ pub fn draw_ui<B: Write>(
         f.render_widget(prev_dir_paragraph, chunks[0]);
 
         // Blocks
+        let home_dir_info = get_home_dir();
+        let block_h = Paragraph::new(home_dir_info).block(
+            Block::default()
+                .title("Users in system")
+                .borders(Borders::ALL),
+        );
+        f.render_widget(block_h, chunks2[2]);
+
         let block = Block::default().title("").borders(Borders::ALL);
         f.render_widget(block, chunks[0]);
 
         let block_h = Block::default().title("").borders(Borders::ALL);
         f.render_widget(block_h, chunks2[0]);
-
-        let block_h = Block::default().title("").borders(Borders::ALL);
-        f.render_widget(block_h, chunks2[2]);
 
         let preview_paragraph = Paragraph::new(app.preview_text.as_ref())
             .block(Block::default().borders(Borders::ALL).title("Preview"));
