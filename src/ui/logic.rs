@@ -3,6 +3,7 @@ use crossterm::{execute, terminal};
 use std::error::Error;
 use std::io;
 use std::path::{Path, PathBuf};
+use std::time::SystemTime;
 
 use walkdir::WalkDir;
 
@@ -29,16 +30,20 @@ pub fn get_file_info(file_path: &str) -> String {
             } else {
                 "File"
             };
+
             let size = metadata.len();
-            let modified_time = metadata
-                .modified()
-                .unwrap_or_else(|_| std::time::SystemTime::now())
-                .duration_since(std::time::UNIX_EPOCH)
-                .map_or(0, |d| d.as_secs());
+
+            let modified_time = match metadata.modified() {
+                Ok(time) => time,
+                Err(_) => SystemTime::now(),
+            };
+            let now = SystemTime::now();
+            let duration = now.duration_since(modified_time).unwrap_or_default();
+            let hours = duration.as_secs() / 3600;
 
             format!(
-                "Type: {}\nSize: {} bytes\nModified: {} seconds ago",
-                file_type, size, modified_time
+                "Type: {}\nSize: {} bytes\nModified: {} hours ago",
+                file_type, size, hours
             )
         }
         Err(e) => format!("Error: {}", e),
