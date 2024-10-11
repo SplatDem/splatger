@@ -1,4 +1,4 @@
-# fileger
+# Splatger
 ## Work in progress
 
 This my first try to make something good with rust.
