@@ -3,7 +3,8 @@
 
 This my first attempt to make something good with rust.
 
-![2024-10-11-215549_1919x1079_scrot](https://github.com/user-attachments/assets/d31add28-ef8b-4f00-b584-13fdae803a27)
+![in_work_2](https://github.com/user-attachments/assets/a50bf150-c8d2-4ba8-8d93-5cc32e1c2322)
+
 
 I don't know when I'll finish it, but now it seems to be usable.
 
