@@ -1,6 +1,8 @@
 use crossterm::{execute, terminal};
 
+use std::env;
 use std::error::Error;
+use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
 use std::time::SystemTime;
@@ -23,7 +25,7 @@ pub fn read_file_content<P: AsRef<Path>>(path: P) -> Result<String, Box<dyn Erro
 }
 
 pub fn get_file_info(file_path: &str) -> String {
-    match std::fs::metadata(file_path) {
+    match fs::metadata(file_path) {
         Ok(metadata) => {
             let file_type = if metadata.is_dir() {
                 "Directory"
@@ -37,8 +39,15 @@ pub fn get_file_info(file_path: &str) -> String {
                 Ok(time) => time,
                 Err(_) => SystemTime::now(),
             };
+
             let now = SystemTime::now();
-            let duration = now.duration_since(modified_time).unwrap_or_default();
+            let duration = match now.duration_since(modified_time) {
+                Ok(duration) => duration,
+                Err(_) => {
+                    return format!("Error: The modified time is in the future.");
+                }
+            };
+
             let hours = duration.as_secs() / 3600;
 
             format!(
@@ -46,7 +55,17 @@ pub fn get_file_info(file_path: &str) -> String {
                 file_type, size, hours
             )
         }
-        Err(e) => format!("Error: {}", e),
+        Err(e) => format!("Error accessing file: {}", e),
+    }
+}
+
+pub fn get_home_dir() -> String {
+    match env::home_dir() {
+        Some(path) => path
+            .file_name()
+            .map(|name| name.to_string_lossy().into_owned())
+            .unwrap_or_else(|| "empty".to_string()),
+        None => "empty".to_string(),
     }
 }
 
