@@ -3,7 +3,8 @@
 
 This my first attempt to make something good with rust.
 
-![in_work_2](https://github.com/user-attachments/assets/a50bf150-c8d2-4ba8-8d93-5cc32e1c2322)
+![work_in_progress_3](https://github.com/user-attachments/assets/21e38ed9-baf4-453e-a314-0696e1313792)
+
 
 
 I don't know when I'll finish it, but now it seems to be usable.
